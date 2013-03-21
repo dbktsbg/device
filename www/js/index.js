@@ -7,4 +7,6 @@ function onBodyLoad()
 function onDeviceReady() 
 {
     /* When this function is called, PhoneGap has been initialized */
+    InitializeAccelerometer();
+    InitializeCamera();
 }

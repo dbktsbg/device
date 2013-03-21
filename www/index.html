@@ -4,6 +4,8 @@
 
     <head>
 
+        <title>Device Playground</title>
+
         <meta 
             http-equiv="Content-Type" 
             content="text/html; 
@@ -35,7 +37,26 @@
             </div>
 
             <div>
-                <button  onclick="getCurrentAcceleration();">getCurrentAcceleration()</button>  
+                <br><button  onclick="getCurrentAcceleration();">Accelerometer</button>  <br><br>
+            </div>
+
+            <div>
+
+                <button onclick="TakePicture();">Camera</button> <br><br>
+                <!--<button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>-->
+                <button onclick="GetPicture(pictureSource.PHOTOLIBRARY);">Photo Library</button><br><br>
+                <!--<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>-->
+            
+                <img 
+                    id="smallImage"
+                    id="smallImage"
+                    style="display:none;width:60px;height:60px;" />
+
+                <img 
+                    id="largeImage" 
+                    src=""
+                    style="display:none;"  />
+
             </div>
 
         </div>

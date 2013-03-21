@@ -1,17 +1,67 @@
+// ---------------------
+// Common
+// ---------------------
 
-function getCurrentAcceleration() 
+var pictureSource;   // picture source
+var destinationType; // sets the format of returned value 
+
+
+function InitializeCamera() 
 {
-    navigator.accelerometer.getCurrentAcceleration(onAccelerationSuccess, onError);
+    pictureSource = navigator.camera.PictureSourceType;
+    destinationType = navigator.camera.DestinationType;
 }
 
-// onSuccess: Get a snapshot of the current acceleration
-function onAccelerationSuccess(acceleration) 
+function onCameraFail(message) 
 {
-    alert('Acceleration X: ' + acceleration.x + '<BR>' + 'Acceleration Y: ' + acceleration.y + '<BR>' + 'Acceleration Z: ' + acceleration.z + '<BR>');
+    alert('Failed because: ' + message);
 }
 
-// onError: Failed to get the acceleration
-function onError() 
+// ---------------------
+// TakePicture
+// ---------------------
+
+function TakePicture() 
 {
-    alert("onError");
+    navigator.camera.getPicture
+        (
+        onPhotoDataSuccess,
+        onCameraFail,
+        { quality: 50, destinationType: destinationType.DATA_URL }
+        ); 
+}
+
+function onPhotoDataSuccess(imageData) 
+{
+    // Get image handle
+    var smallImage = document.getElementById('smallImage');
+    // Unhide image elements
+    smallImage.style.display = 'block';
+    // Show the captured photo (inline CSS rules are used to resize the image)
+    smallImage.src = "data:image/jpeg;base64," + imageData;
+}
+
+// ---------------------
+// GetPicture
+// ---------------------
+
+function GetPicture(source) 
+{
+    // Retrieve image file location from specified source
+    navigator.camera.getPicture
+        (
+        onPhotoURISuccess,
+        onCameraFail, 
+        { quality: 50, destinationType: destinationType.FILE_URI, sourceType: source}
+        );
+}
+
+function onPhotoURISuccess(imageURI) 
+{
+    // Get image handle
+    var largeImage = document.getElementById('largeImage');
+    // Unhide image elements
+    largeImage.style.display = 'block';
+    // Show the captured photo (inline CSS rules are used to resize the image)
+    largeImage.src = imageURI;
 }
