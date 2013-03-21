@@ -8,6 +8,7 @@ var destinationType; // sets the format of returned value
 
 function InitializeCamera() 
 {
+    alert("InitializeCamera");
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
 }
@@ -23,6 +24,9 @@ function onCameraFail(message)
 
 function TakePicture() 
 {
+
+    alert("TakePicture");
+
     navigator.camera.getPicture
         (
         onPhotoDataSuccess,
@@ -33,6 +37,7 @@ function TakePicture()
 
 function onPhotoDataSuccess(imageData) 
 {
+    alert("onPhotoDataSuccess");
     // Get image handle
     var smallImage = document.getElementById('smallImage');
     // Unhide image elements
