@@ -1,5 +1,5 @@
 
-function onBodyLoad() 
+function OnBodyLoad() 
 {
     document.addEventListener("deviceready", onDeviceReady, false);
 }
