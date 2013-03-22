@@ -8,7 +8,6 @@ var destinationType; // sets the format of returned value
 
 function InitializeCamera() 
 {
-    alert("InitializeCamera");
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
 }
@@ -31,7 +30,7 @@ function TakePicture()
         (
         onPhotoDataSuccess,
         onCameraFail,
-        { quality: 50, destinationType: destinationType.DATA_URL }
+        { quality: 50, destinationType: destinationType.FILE_URI }
         ); 
 }
 
