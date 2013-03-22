@@ -23,9 +23,6 @@ function onCameraFail(message)
 
 function TakePicture() 
 {
-
-    alert("TakePicture");
-
     navigator.camera.getPicture
         (
         onPhotoDataSuccess,
