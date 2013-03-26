@@ -36,16 +36,14 @@
 
             </div>
 
-            <div>
+           <!-- <div>
                 <br><button  onclick="getCurrentAcceleration();">Accelerometer</button>  <br><br>
-            </div>
+            </div>-->
 
-            <div>
+            <!--<div>
 
                 <button onclick="TakePicture();">Camera</button> <br><br>
-                <!--<button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>-->
                 <button onclick="GetPicture(pictureSource.PHOTOLIBRARY);">Photo Library</button><br><br>
-                <!--<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>-->
             
                 <img 
                     id="smallImage"
@@ -57,17 +55,38 @@
                     src=""
                     style="display:none;"  />
 
-            </div>
+            </div>-->
 
+            <div><button onclick="GetDeviceConfiguration()">Device Config</button></div>
+            <div id="DeviceConfigurationContainer"></div>
+
+            <!--<div>
+                <iframe
+                    height="500" 
+                    width="300" 
+                    src="http://www.cloud-vote.com"></iframe>
+            </div>-->
+            
         </div>
 
+        <!--PhoneGap script-->
         <script 
             type="text/javascript" 
             src="phonegap.js"></script>
+            
+        <!--PlugIn Scripts-->
+        <script 
+            type="text/javascript" 
+            src="childbrowser.js"></script>
 
+        <!--My Scripts-->
         <script 
             type="text/javascript" 
             src="js/index.js"></script>
+
+        <script 
+            type="text/javascript" 
+            src="js/device.js"></script>
 
         <script 
             type="text/javascript" 
