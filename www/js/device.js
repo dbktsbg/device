@@ -1,19 +1,48 @@
 
 function GetDeviceConfiguration() 
 {
-    
-    var MyURL = "http://127.0.0.1:81/DeviceAdmin/GetDeviceAsJSON";
-    var DataType = "json";
-    var DeviceSN = 123456;
 
-    alert("GetDeviceConfiguration() - START");
+    var ARCloudWebAPIAddress = "http://localhost:61365/api/devicecors";
+
+    $.ajax(
+                {
+                    url: ARCloudWebAPIAddress,
+                    type: "GET",
+                    success:
+                                function (result) {
+                                    alert("result.length=" + result.length);
+                                    var text = "";
+                                    for (var i = 0; i < result.length; i++) {
+                                        if (i > 0) text = text + ", ";
+                                        text = text + result[i];
+                                    }
+                                    $("#DeviceConfigurationContainer").text(text);
+                                },
+                    error:
+                                function (jqXHR, textStatus, errorThrown) {
+                                    alert("textStatus=" + textStatus);
+                                    $("#DeviceConfigurationContainer").text(textStatus);
+                                }
+                }
+            );
+
+    //var MyURL = "http://127.0.0.1:81/api/device";
+    //var DataType = "json";
+    //var DeviceSN = 123456;
+
+    //alert("GetDeviceConfiguration() - START");
+
+    //$.getJSON("http://127.0.0.1:81/api/device", function (data) { alert("Title: " + data.Title); });
+
+    //$.getJSON("http://127.0.0.1:81/api/device/?callback=?", function (data) { alert("Title: " + data.Title); });  
+
     
     //childBrowser.showWebPage("www.google.com")
     
     //alert("$.get(" + MyURL + ", " + DeviceSN + ", function (data, textStatus) { GetDeviceConfigurationComplete(data); }, 'json');");
         //$.get(MyURL, DeviceSN, function (data, textStatus) { GetDeviceConfigurationComplete(data); }, 'json');
 
-    $.getJSON(MyURL, function (data) { alert("getJSON() WORKS !!!"); });
+    //$.getJSON(MyURL, function (data) { alert("getJSON() WORKS !!!"); });
 
 //    $.ajax({
 //        type: 'GET',
@@ -109,7 +138,7 @@ function GetDeviceConfiguration()
 //            ); 
 
 
-    alert("GetDeviceConfiguration() - COMPLETE");
+    //alert("GetDeviceConfiguration() - COMPLETE");
 }
 
 function GetDeviceConfigurationComplete(result) 
