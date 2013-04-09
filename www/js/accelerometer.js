@@ -1,8 +1,13 @@
 
+var AccelerationSensitivity = 10;
+var FrequencyInMiliseconds = 1000; 
+var AccelerationXMax = 0;
+var AccelerationXMin = 0;
+var AccelerationYMax = 0;
+var AccelerationYMin = 0;
+var AccelerationZMax = 0;
+var AccelerationZMin = 0;
 var watchID = null;
-var PreviousX = 0;
-var PreviousY = 0;
-var PreviousZ = 0;
 
 function InitializeAccelerometer() 
 {
@@ -26,7 +31,7 @@ function InitializeAccelerometer()
 
 function startWatch() 
 {
-    var options = { frequency: 500 };
+    var options = { frequency: FrequencyInMiliseconds };
     watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 }
 
@@ -40,17 +45,28 @@ function stopWatch()
 }
 
 function onSuccess(acceleration) 
-{
-    
+{   
+    var IsDeviceQuickTilted = false;
     var element = document.getElementById('accelerometer');
 
-    if (PreviousX != acceleration.x || PreviousY != acceleration.y || PreviousZ != acceleration.z) 
+    if (acceleration.x > AccelerationXMax) { IsDeviceQuickTilted = true; }
+    if (acceleration.x < AccelerationXMin) { IsDeviceQuickTilted = true; }
+    if (acceleration.y > AccelerationYMax) { IsDeviceQuickTilted = true; }
+    if (acceleration.y < AccelerationYMin) { IsDeviceQuickTilted = true; }
+    if (acceleration.z > AccelerationZMax) { IsDeviceQuickTilted = true; }
+    if (acceleration.z < AccelerationZMin) { IsDeviceQuickTilted = true; }
+
+    if (IsDeviceQuickTilted == true) 
     {
 
         // wake-up screen...
-        PreviousX = acceleration.x;
-        PreviousY = acceleration.y;
-        PreviousZ = acceleration.z;
+        IsDeviceQuickTilted = false;
+        AccelerationXMax = acceleration.x + (AccelerationSensitivity / 2);
+        AccelerationXMin = acceleration.x - (AccelerationSensitivity / 2);
+        AccelerationYMax = acceleration.y + (AccelerationSensitivity / 2);
+        AccelerationYMin = acceleration.y - (AccelerationSensitivity / 2);
+        AccelerationZMax = acceleration.z + (AccelerationSensitivity / 2);
+        AccelerationZMin = acceleration.z - (AccelerationSensitivity / 2);
 
         element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
                                         'Acceleration Y: ' + acceleration.y + '<br />' +
