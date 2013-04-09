@@ -1,5 +1,5 @@
 
-var AccelerationSensitivity = 10;
+var AccelerationSensitivity = 1.0;
 var FrequencyInMiliseconds = 1000; 
 var AccelerationXMax = 0;
 var AccelerationXMin = 0;
@@ -46,18 +46,16 @@ function stopWatch()
 
 function onSuccess(acceleration) 
 {   
-    var IsDeviceQuickTilted = false;
-    var element = document.getElementById('accelerometer');
+//    var IsDeviceQuickTilted = false;
+//    if (acceleration.x > AccelerationXMax) { IsDeviceQuickTilted = true; }
+//    if (acceleration.x < AccelerationXMin) { IsDeviceQuickTilted = true; }
+//    if (acceleration.y > AccelerationYMax) { IsDeviceQuickTilted = true; }
+//    if (acceleration.y < AccelerationYMin) { IsDeviceQuickTilted = true; }
+//    if (acceleration.z > AccelerationZMax) { IsDeviceQuickTilted = true; }
+//    if (acceleration.z < AccelerationZMin) { IsDeviceQuickTilted = true; }
 
-    if (acceleration.x > AccelerationXMax) { IsDeviceQuickTilted = true; }
-    if (acceleration.x < AccelerationXMin) { IsDeviceQuickTilted = true; }
-    if (acceleration.y > AccelerationYMax) { IsDeviceQuickTilted = true; }
-    if (acceleration.y < AccelerationYMin) { IsDeviceQuickTilted = true; }
-    if (acceleration.z > AccelerationZMax) { IsDeviceQuickTilted = true; }
-    if (acceleration.z < AccelerationZMin) { IsDeviceQuickTilted = true; }
-
-    if (IsDeviceQuickTilted == true) 
-    {
+//    if (IsDeviceQuickTilted == true) 
+//    {
 
         // wake-up screen...
         IsDeviceQuickTilted = false;
@@ -68,11 +66,13 @@ function onSuccess(acceleration)
         AccelerationZMax = acceleration.z + (AccelerationSensitivity / 2);
         AccelerationZMin = acceleration.z - (AccelerationSensitivity / 2);
 
+        var element = document.getElementById('accelerometer');
+
         element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
                                         'Acceleration Y: ' + acceleration.y + '<br />' +
                                         'Acceleration Z: ' + acceleration.z + '<br />' +
                                         'Timestamp: ' + acceleration.timestamp + '<br />';
-    }
+    //}
 }
 
 function onError() 
