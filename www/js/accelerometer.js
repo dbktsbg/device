@@ -84,6 +84,11 @@ function onSuccess(acceleration)
                                         'Acceleration Y: ' + acceleration.y + '<br />' +
                                         'Acceleration Z: ' + acceleration.z + '<br />' +
                                         'Timestamp: ' + acceleration.timestamp + '<br />';
+
+        navigator.notification.vibrate(1000);
+
+
+
     }
 }
 
