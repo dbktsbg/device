@@ -6,6 +6,7 @@ var PreviousZ = 0;
 
 function InitializeAccelerometer() 
 {
+    alert("InitializeAccelerometer()");
     startWatch();
 }
 
@@ -28,6 +29,7 @@ function startWatch()
 {
     var options = { frequency: 500 };
     watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    alert("watchAcceleration()");
 }
 
 function stopWatch() 
@@ -41,22 +43,26 @@ function stopWatch()
 
 function onSuccess(acceleration) 
 {
+    
+    alert("onSuccess()");
+
     var element = document.getElementById('accelerometer');
 
-    if (PreviousX != acceleration.x) || (PreviousY != acceleration.y) || (PreviousZ != acceleration.z) 
-    {
+//    if (PreviousX != acceleration.x) || (PreviousY != acceleration.y) || (PreviousZ != acceleration.z) 
+//    {
 
-        // wake-up screen...
+//        // wake-up screen...
+//        alert("WAKE-UP!");
 
-        PreviousX = acceleration.x;
-        PreviousY = acceleration.y;
-        PreviousZ = acceleration.z;
+//        PreviousX = acceleration.x;
+//        PreviousY = acceleration.y;
+//        PreviousZ = acceleration.z;
 
         element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
                                         'Acceleration Y: ' + acceleration.y + '<br />' +
                                         'Acceleration Z: ' + acceleration.z + '<br />' +
                                         'Timestamp: ' + acceleration.timestamp + '<br />';
-    }
+//    }
 }
 
 function onError() 
