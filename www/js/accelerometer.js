@@ -68,6 +68,9 @@ function onSuccess(acceleration)
 
         // wake-up screen...
         IsDeviceQuickTilted = false;
+        PreviousAccelerationX = acceleration.x
+        PreviousAccelerationY = acceleration.y
+        PreviousAccelerationZ = acceleration.z
 //        AccelerationXMax = acceleration.x + (AccelerationSensitivity / 2);
 //        AccelerationXMin = acceleration.x - (AccelerationSensitivity / 2);
 //        AccelerationYMax = acceleration.y + (AccelerationSensitivity / 2);
