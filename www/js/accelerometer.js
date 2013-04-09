@@ -87,8 +87,6 @@ function onSuccess(acceleration)
 
         navigator.notification.vibrate(1000);
 
-
-
     }
 }
 
