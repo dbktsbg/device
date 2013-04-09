@@ -1,12 +1,17 @@
 
 var AccelerationSensitivity = 1.0;
-var FrequencyInMiliseconds = 1000; 
-var AccelerationXMax = 0;
-var AccelerationXMin = 0;
-var AccelerationYMax = 0;
-var AccelerationYMin = 0;
-var AccelerationZMax = 0;
-var AccelerationZMin = 0;
+var FrequencyInMiliseconds = 1000;
+var PreviousAccelerationX = 0;
+var PreviousAccelerationY = 0;
+var PreviousAccelerationZ = 0;
+
+//var AccelerationXMax = 0;
+//var AccelerationXMin = 0;
+//var AccelerationYMax = 0;
+//var AccelerationYMin = 0;
+//var AccelerationZMax = 0;
+//var AccelerationZMin = 0;
+
 var watchID = null;
 
 function InitializeAccelerometer() 
@@ -45,8 +50,12 @@ function stopWatch()
 }
 
 function onSuccess(acceleration) 
-{   
-//    var IsDeviceQuickTilted = false;
+{
+    var IsDeviceQuickTilted = false;
+    if ( Math.abs(PreviousAccelerationX - acceleration.x) > AccelerationSensitivity) { IsDeviceQuickTilted = true; }
+    if ( Math.abs(PreviousAccelerationY - acceleration.y) > AccelerationSensitivity) { IsDeviceQuickTilted = true; }
+    if ( Math.abs(PreviousAccelerationZ - acceleration.z) > AccelerationSensitivity) { IsDeviceQuickTilted = true; }
+
 //    if (acceleration.x > AccelerationXMax) { IsDeviceQuickTilted = true; }
 //    if (acceleration.x < AccelerationXMin) { IsDeviceQuickTilted = true; }
 //    if (acceleration.y > AccelerationYMax) { IsDeviceQuickTilted = true; }
@@ -54,17 +63,17 @@ function onSuccess(acceleration)
 //    if (acceleration.z > AccelerationZMax) { IsDeviceQuickTilted = true; }
 //    if (acceleration.z < AccelerationZMin) { IsDeviceQuickTilted = true; }
 
-//    if (IsDeviceQuickTilted == true) 
-//    {
+    if (IsDeviceQuickTilted == true) 
+    {
 
         // wake-up screen...
         IsDeviceQuickTilted = false;
-        AccelerationXMax = acceleration.x + (AccelerationSensitivity / 2);
-        AccelerationXMin = acceleration.x - (AccelerationSensitivity / 2);
-        AccelerationYMax = acceleration.y + (AccelerationSensitivity / 2);
-        AccelerationYMin = acceleration.y - (AccelerationSensitivity / 2);
-        AccelerationZMax = acceleration.z + (AccelerationSensitivity / 2);
-        AccelerationZMin = acceleration.z - (AccelerationSensitivity / 2);
+//        AccelerationXMax = acceleration.x + (AccelerationSensitivity / 2);
+//        AccelerationXMin = acceleration.x - (AccelerationSensitivity / 2);
+//        AccelerationYMax = acceleration.y + (AccelerationSensitivity / 2);
+//        AccelerationYMin = acceleration.y - (AccelerationSensitivity / 2);
+//        AccelerationZMax = acceleration.z + (AccelerationSensitivity / 2);
+//        AccelerationZMin = acceleration.z - (AccelerationSensitivity / 2);
 
         var element = document.getElementById('accelerometer');
 
@@ -72,7 +81,7 @@ function onSuccess(acceleration)
                                         'Acceleration Y: ' + acceleration.y + '<br />' +
                                         'Acceleration Z: ' + acceleration.z + '<br />' +
                                         'Timestamp: ' + acceleration.timestamp + '<br />';
-    //}
+    }
 }
 
 function onError() 
