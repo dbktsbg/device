@@ -2,29 +2,65 @@
 function GetDeviceConfiguration() 
 {
 
-    var ARCloudWebAPIAddress = "http://localhost:61365/api/devicecors";
+    var ARCloudWebAPIAddress = "http://meridiacloudwebsite.cloudapp.net/DeviceAdmin/GetDeviceInfoPhonegap";
 
+    var deviceDetail = {};
+    deviceDetail.UUID = window.device.uuid;
+    deviceDetail.DeviceName = window.device.name;
+    deviceDetail.Platform = window.device.platform;
+    
     $.ajax(
+            {
+                type: "POST",
+                url: ARCloudWebAPIAddress,
+                data: { deviceInfo: JSON.stringify(deviceDetail) },
+                success: function (response) 
                 {
-                    url: ARCloudWebAPIAddress,
-                    type: "GET",
-                    success:
-                                function (result) {
-                                    alert("result.length=" + result.length);
-                                    var text = "";
-                                    for (var i = 0; i < result.length; i++) {
-                                        if (i > 0) text = text + ", ";
-                                        text = text + result[i];
-                                    }
-                                    $("#DeviceConfigurationContainer").text(text);
-                                },
-                    error:
-                                function (jqXHR, textStatus, errorThrown) {
-                                    alert("textStatus=" + textStatus);
-                                    $("#DeviceConfigurationContainer").text(textStatus);
-                                }
+                    // Hide the status 
+                    sendStatus.style.visibility = 'hidden';
+                    // Parse the json Object to show in alert
+                    var obj = JSON.parse(GetNodeValue(response.firstChild));
+                    var status = obj.Status;
+                    var dateProcessed = obj.Date;
+                    alert('Data sent successfully. Server response is: ' + '\n\nStatus: ' + status + '\nDate Processed: ' + dateProcessed);
+                },
+                error: function (xhr, response, thrownError, ajaxOptions) 
+                {
+                    alert("Error: " + xhr.status + '  ' + thrownError + '  ' + ajaxOptions);
                 }
-            );
+            });
+
+}
+
+//    $.ajax(
+//                {
+//                    url: ARCloudWebAPIAddress,
+//                    type: "GET",
+//                    success:
+//                                function (result) {
+//                                    alert("result.length=" + result.length);
+//                                    var text = "";
+//                                    for (var i = 0; i < result.length; i++) {
+//                                        if (i > 0) text = text + ", ";
+//                                        text = text + result[i];
+//                                    }
+//                                    $("#DeviceConfigurationContainer").text(text);
+//                                },
+//                    error:
+//                                function (jqXHR, textStatus, errorThrown) {
+//                                    alert("textStatus=" + textStatus);
+//                                    $("#DeviceConfigurationContainer").text(textStatus);
+//                                }
+//                }
+//            );
+
+
+
+
+
+
+
+
 
     //var MyURL = "http://127.0.0.1:81/api/device";
     //var DataType = "json";
@@ -139,19 +175,20 @@ function GetDeviceConfiguration()
 
 
     //alert("GetDeviceConfiguration() - COMPLETE");
-}
 
-function GetDeviceConfigurationComplete(result) 
-{
-    alert("AAA");
-    if (result.ReturnStatus == "SUCCEEDED") 
-    {
-        $("#DeviceConfigurationContainer").append('<p>' + result.DeviceViewModel.DeviceSN + '</p>');
-        $("#DeviceConfigurationContainer").append('<p>' + result.DeviceViewModel.DeviceModel + '</p>');
-    }
-    else 
-    {
-        $("#DeviceConfigurationContainer").append('<p>' + result.ErrorViewModel.UserErrorDetails + '</p>');
-        alert("GetDeviceConfiguration() failed.");
-    }
-}
+
+
+//function GetDeviceConfigurationComplete(result) 
+//{
+//    alert("AAA");
+//    if (result.ReturnStatus == "SUCCEEDED") 
+//    {
+//        $("#DeviceConfigurationContainer").append('<p>' + result.DeviceViewModel.DeviceSN + '</p>');
+//        $("#DeviceConfigurationContainer").append('<p>' + result.DeviceViewModel.DeviceModel + '</p>');
+//    }
+//    else 
+//    {
+//        $("#DeviceConfigurationContainer").append('<p>' + result.ErrorViewModel.UserErrorDetails + '</p>');
+//        alert("GetDeviceConfiguration() failed.");
+//    }
+//}
