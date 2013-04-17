@@ -8,6 +8,8 @@ function GetDeviceConfiguration()
     deviceDetail.UUID = window.device.uuid;
     deviceDetail.DeviceName = window.device.name;
     deviceDetail.Platform = window.device.platform;
+
+    alert("deviceDetail.UUID=" + deviceDetail.UUID);
     
     $.ajax(
             {
